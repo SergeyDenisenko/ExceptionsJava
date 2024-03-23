@@ -2,6 +2,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import Exceptions.ExceptionIncompleteData;
+import Exceptions.ExceptionInvalidValue;
+
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
@@ -20,7 +23,7 @@ public class App {
         try {
             data = str.split(" ");
         } catch (Exception e) {
-            throw new Exception("Введены неполные данные.");
+            throw new ExceptionIncompleteData("Введены неполные данные.", e);
         }
 
         try {
@@ -31,34 +34,34 @@ public class App {
             phone_number = data[4];
             gender = data[5].charAt(0);
         } catch (Exception e) {
-            throw new Exception("Введены неполные данные.");
+            throw new ExceptionIncompleteData("Введены неполные данные.", e);
         }
 
         if (surname.length() < 2) {
-            throw new Exception("Введено некорректное значение");
+            throw new ExceptionInvalidValue("Введено некорректное значение", new Exception());
         }
 
         if (name.length() < 2) {
-            throw new Exception("Введено некорректное значение");
+            throw new ExceptionInvalidValue("Введено некорректное значение", new Exception());
         }
 
         if (midle_name.length() < 2) {
-            throw new Exception("Введено некорректное значение");
+            throw new ExceptionInvalidValue("Введено некорректное значение", new Exception());
         }
 
         if (birthdate.length() != 10) {
-            throw new Exception("Введено некорректное значение");
+            throw new ExceptionInvalidValue("Введено некорректное значение", new Exception());
         }
 
         if (phone_number.length() < 3) {
-            throw new Exception("Введено некорректное значение");
+            throw new ExceptionInvalidValue("Введено некорректное значение", new Exception());
         }
 
         String[] date;
         try {
             date = birthdate.split("\\.");
         } catch (Exception e) {
-            throw new Exception("Введены неполные данные.");
+            throw new ExceptionIncompleteData("Введены неполные данные.", e);
         }
 
         int day;
@@ -66,15 +69,15 @@ public class App {
         int year;
 
         if (date[0].length() != 2) {
-            throw new Exception("Введены неполные данные.");
+            throw new ExceptionIncompleteData("Введены неполные данные.", new Exception());
         }
 
         if (date[1].length() != 2) {
-            throw new Exception("Введены неполные данные.");
+            throw new ExceptionIncompleteData("Введены неполные данные.", new Exception());
         }
 
         if (date[2].length() != 4) {
-            throw new Exception("Введены неполные данные.");
+            throw new ExceptionIncompleteData("Введены неполные данные.", new Exception());
         }
 
         try {
@@ -82,19 +85,19 @@ public class App {
             month = Integer.parseInt(date[1]);
             year = Integer.parseInt(date[2]);
         } catch (Exception e) {
-            throw new Exception("Введено некорректное значение");
+            throw new ExceptionInvalidValue("Введено некорректное значение", e);
         }
 
         Long phone;
         try {
             phone = Math.abs(Long.parseLong(phone_number));
         } catch (Exception e) {
-            throw new Exception("Введено некорректное значение");
+            throw new ExceptionInvalidValue("Введено некорректное значение", e);
         }
 
         System.out.println(gender);
         if (!(gender == 'm' || gender == 'f')) {
-            throw new Exception("Введено некорректное значение");
+            throw new ExceptionInvalidValue("Введено некорректное значение", new Exception());
         }
 
         String file = surname+".txt";

@@ -13,7 +13,6 @@ public class App {
         System.out.println("Фамилия Имя Отчество дата_рождения номер_телефона пол:");
         String str = scanner.nextLine();
 
-        String[] data;
         String surname;
         String name;
         String midle_name;
@@ -22,12 +21,7 @@ public class App {
         char gender;
 
         try {
-            data = str.split(" ");
-        } catch (Exception e) {
-            throw new ExceptionIncompleteData("Введены неполные данные.", e);
-        }
-
-        try {
+            String[] data = str.split(" ");
             surname = data[0];
             name = data[1];
             midle_name = data[2];

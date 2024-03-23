@@ -2,6 +2,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import Domain.Validate;
 import Exceptions.ExceptionIncompleteData;
 import Exceptions.ExceptionInvalidValue;
 
@@ -37,25 +38,11 @@ public class App {
             throw new ExceptionIncompleteData("Введены неполные данные.", e);
         }
 
-        if (surname.length() < 2) {
-            throw new ExceptionInvalidValue("Введено некорректное значение", new Exception());
-        }
-
-        if (name.length() < 2) {
-            throw new ExceptionInvalidValue("Введено некорректное значение", new Exception());
-        }
-
-        if (midle_name.length() < 2) {
-            throw new ExceptionInvalidValue("Введено некорректное значение", new Exception());
-        }
-
-        if (birthdate.length() != 10) {
-            throw new ExceptionInvalidValue("Введено некорректное значение", new Exception());
-        }
-
-        if (phone_number.length() < 3) {
-            throw new ExceptionInvalidValue("Введено некорректное значение", new Exception());
-        }
+        Validate.isLengthMin(surname, 2);
+        Validate.isLengthMin(name, 2);
+        Validate.isLengthMin(midle_name, 2);
+        Validate.isLength(birthdate, 10);
+        Validate.isLengthMin(phone_number, 3);
 
         String[] date;
         try {
